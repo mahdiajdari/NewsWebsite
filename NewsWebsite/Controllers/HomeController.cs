@@ -189,6 +189,10 @@ namespace NewsWebsite.Controllers
             else
                 return PartialView("_SignIn");
         }
+        public async Task<IActionResult> ContactUs()
+        {
+            return View();
+        }
 
 
         [HttpPost]
