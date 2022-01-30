@@ -40,7 +40,7 @@
         <!-- Top Header Area -->
         <div class="top-header-area">
             <div class="container">
-                  <div class="row align-items-center">
+                <div class="row align-items-center">
                     <div class="col-12 col-md-6">
                         <!-- Breaking News Widget -->
                         @await Component.InvokeAsync("LatestNewsTitleList")
@@ -55,7 +55,7 @@
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
                                 <a href="#"><i class="fa fa-telegram"></i></a>
                             </div>
-                          
+
                             <!-- Top Search Area -->
                             <div class="top-search-area">
                                 <form asp-action="Search" method="post">
@@ -72,7 +72,7 @@
                                 <a class="widget-title" href="/Home/ContactUs">ارتباط با ما</a>
                             </div>
                         </div>
-                        
+
 
                     </div>
                 </div>
@@ -82,14 +82,21 @@
         <!-- Navbar Area -->
         <div class="vizew-main-menu" id="sticker">
             <div class="classy-nav-container breakpoint-off">
-              
+
                 <div class="container">
 
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between" id="vizewNav">
 
                         <!-- Nav brand -->
-                        <a href="/Home/Index" class="nav-brand"><img src="/assets/img/@writableLocations.Value.SiteInfo.Logo" alt="" height="90">@writableLocations.Value.SiteInfo.Title </a>
+                        <a href="/Home/Index" class="nav-brand">
+                            <img src="/assets/img/@writableLocations.Value.SiteInfo.Logo" class="logoSlideShowItem animated bounceInRight" alt="" height="90">
+
+                            <img src="/assets/img/Logo1.jpg" class="logoSlideShowItem animated bounceInRight" alt="" height="90">
+
+                            @writableLocations.Value.SiteInfo.Title
+
+                        </a>
 
 
                         <!-- Navbar Toggler -->

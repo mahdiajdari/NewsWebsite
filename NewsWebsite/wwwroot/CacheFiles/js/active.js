@@ -120,5 +120,18 @@
     if (browserWindow.width() > 767) {
         new WOW().init();
     }
+    var myIndex = 0;
+    carousel();
 
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("logoSlideShowItem");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) { myIndex = 1 }
+        x[myIndex - 1].style.display = "inline";
+        setTimeout(carousel, 2500); // Change image every 2 seconds
+    }
 })(jQuery);

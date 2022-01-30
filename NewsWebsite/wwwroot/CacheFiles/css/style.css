@@ -3347,3 +3347,6 @@ a:not([href]):not([tabindex]) {
 .loading .gear.two {
     -webkit-animation: anticlockwise 3s linear infinite;
 }
+.logoSlideShowItem{
+    display:none;
+}
