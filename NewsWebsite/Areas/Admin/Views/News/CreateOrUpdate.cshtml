@@ -131,6 +131,11 @@
                                 <span asp-validation-for="Url" class="text-danger"></span>
                             </div>
                             <textarea id="mytextarea" asp-for="Description"></textarea>
+                            <div>
+                                <label for="formFileLg" class="form-label" style="margin-top:25px;">فایل pdf :</label>
+                                <input class="form-control form-control-lg" asp-for="pdfFile" id="formFileLg" type="file">
+                                <input type="submit" name="btnUpload"  value="ارسال فایل" onclick="" id="btnUpload" class="MyButton" style="width:100px;margin-top:25px;" />
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <div class="card mb-2">

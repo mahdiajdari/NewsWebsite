@@ -54,6 +54,9 @@ namespace NewsWebsite.ViewModels.News
         [JsonIgnore,Display(Name ="تصویر شاخص")]
         public string ImageFile {get;set;}
 
+        [JsonIgnore, Display(Name = "فایل خبر")]
+        public string pdfFile { get; set; }
+
         [JsonIgnore]
         public bool IsPublish { get; set; }
 
