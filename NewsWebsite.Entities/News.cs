@@ -16,6 +16,7 @@ namespace NewsWebsite.Entities
         public int UserId { get; set; }
         public string Url { get; set; }
         public string ImageName { get; set; }
+        public string pdfFileName { get; set; }
         public bool IsPublish { get; set; }
         public bool IsInternal { get; set; }
         public string Abstract { get; set; }

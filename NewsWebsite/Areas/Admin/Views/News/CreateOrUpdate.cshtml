@@ -14,12 +14,11 @@
 <script src="~/CacheFiles/lib/Bootstrap4-tags-inputmaster/js/tagsinput.js" asp-append-version="true"></script>
 <script src="~/CacheFiles/lib/Bootstrap4-tags-inputmaster/js/typeahead.js" asp-append-version="true"></script>
 
-<link href="~/CacheFiles/lib/clockPicker/bootstrap-clockpicker.min.css" rel="stylesheet"  asp-append-version="true"/>
+<link href="~/CacheFiles/lib/clockPicker/bootstrap-clockpicker.min.css" rel="stylesheet" asp-append-version="true" />
 <script src="~/CacheFiles/lib/clockPicker/bootstrap-clockpicker.min.js" asp-append-version="true"></script>
 
 <script src="~/CacheFiles/lib/tinymce/tinymce.min.js" asp-append-version="true"></script>
 <style>
-
     label.cabinet {
         display: block;
         cursor: pointer;
@@ -38,7 +37,6 @@
         height: 550px;
         padding-bottom: 25px;
     }
-
 
     .modal-dialog {
         max-width: 57%;
@@ -98,7 +96,7 @@
                     <span>افزودن خبر </span>
                 }
             </div>
-            <form asp-action="CreateOrUpdate" asp-controller="News">
+            <form asp-action="CreateOrUpdate" asp-controller="News" enctype="multipart/form-data">
                 <input type="hidden" asp-for="NewsId" />
                 <div class="card-body">
                     @if (ViewBag.Alert != null)
@@ -134,7 +132,7 @@
                             <div>
                                 <label for="formFileLg" class="form-label" style="margin-top:25px;">فایل pdf :</label>
                                 <input class="form-control form-control-lg" asp-for="pdfFile" id="formFileLg" type="file">
-                                <input type="submit" name="btnUpload"  value="ارسال فایل" onclick="" id="btnUpload" class="MyButton" style="width:100px;margin-top:25px;" />
+                                
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -299,7 +297,6 @@
 
 
 <script>
-
     //tinymce
     tinymce.init({
         selector: '#mytextarea',
@@ -309,24 +306,20 @@
         language: 'fa_IR',
         directionality: 'rtl',
         images_upload_url: '/Admin/News/UploadNewsImage'
+        
    });
-
    //clockpicker
    $('.clockpicker').clockpicker({
         placement: 'bottom',
         donetext: 'انتخاب'
   });
-
     //treeView
     $('.demo1').bonsai();
-
-
     //DatePicker
     $("#PublishDate").MdPersianDateTimePicker({
          targetTextSelector:"#InputPublishDate",
          placement:'top',
     });
-
     //Crop
     var $uploadCrop,
         tempFilename,
@@ -346,7 +339,6 @@
             swal("Sorry - you're browser doesn't support the FileReader API");
         }
     }
-
     $uploadCrop = $('#upload-demo').croppie({
         viewport: {
             width: 740,
@@ -362,12 +354,10 @@
             console.log('jQuery bind complete');
         });
     });
-
     $('.item-img').on('change', function () {
         imageId = $(this).data('id'); tempFilename = $(this).val();
         $('#cancelCropBtn').data('id', imageId); readFile(this);
     });
-
     $('#cropImageBtn').on('click', function (ev) {
         $uploadCrop.croppie('result', {
             type: 'base64',
@@ -379,7 +369,6 @@
             $('#cropImagePop').modal('hide');
         });
     });
-
     $('#futurePublish').change(function(){
     if(this.checked) {
         $(".futurePublishDiv").show();
@@ -387,8 +376,6 @@
         $(".futurePublishDiv").hide();
     }
 });
-
-
     // Select Tag
      var substringMatcher = function(strs) {
             return function findMatches(q, cb) {
@@ -400,11 +387,9 @@
                     matches.push(str);
                 }
                 });
-
                 cb(matches);
             };
             };
-
             var states = @Html.Raw(Json.Serialize(ViewBag.Tags));
             $('#tagstype').tagsinput({
                     typeaheadjs:({
@@ -416,6 +401,4 @@
                     source: substringMatcher(states)
                 })
             });
-
 </script>
-

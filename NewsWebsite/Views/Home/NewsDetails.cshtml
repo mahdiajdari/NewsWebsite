@@ -105,9 +105,22 @@
                                     </a>
                                 </div>
                             </div>
+
                         </div>
 
+
                         @Html.Raw(Model.News.Description)
+
+                        <div class="post-content mt-1" style="margin-top:15px;margin-bottom:15px;">
+                            <p>
+                                <a href="~/newsPDFs/@Model.News.pdfFileName " style="color:black;" download><i class="icon-file"><sm>دانلود فایل خبر</sm></i></a>
+
+                            </p>
+
+                        </div>
+
+                       
+
                         <!-- Post Tags -->
                         @if (Model.News.TagNamesList.Count() != 0)
                         {

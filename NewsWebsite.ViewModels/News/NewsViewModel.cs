@@ -1,4 +1,5 @@
-﻿using NewsWebsite.Common.Attributes;
+﻿using Microsoft.AspNetCore.Http;
+using NewsWebsite.Common.Attributes;
 using NewsWebsite.Entities;
 using NewsWebsite.Entities.identity;
 using System;
@@ -55,7 +56,9 @@ namespace NewsWebsite.ViewModels.News
         public string ImageFile {get;set;}
 
         [JsonIgnore, Display(Name = "فایل خبر")]
-        public string pdfFile { get; set; }
+        public IFormFile pdfFile { get; set; }
+
+        public string pdfFileName { get; set; }
 
         [JsonIgnore]
         public bool IsPublish { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -26,6 +27,7 @@ namespace NewsWebsite.Areas.Admin.Controllers
         private const string NewsNotFound = "خبر یافت نشد.";
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _context;
+       
 
         public NewsController(IUnitOfWork uw, IMapper mapper, IWebHostEnvironment env, IHttpContextAccessor context)
         {
@@ -191,6 +193,10 @@ namespace NewsWebsite.Areas.Admin.Controllers
                 if (viewModel.ImageFile != null)
                     viewModel.ImageName = $"news-{StringExtensions.GenerateId(10)}.jpg";
 
+                //if(viewModel.pdfFile != null)
+                //    viewModel.pdfFile = $"news-{StringExtensions.GenerateId(10)}.pdf";
+                
+
                 if (viewModel.NewsId.HasValue())
                 {
                     var news = _uw.BaseRepository<News>().FindByConditionAsync(n=>n.NewsId==viewModel.NewsId,null,n => n.NewsCategories,n=>n.NewsTags).Result.FirstOrDefault();
@@ -211,6 +217,22 @@ namespace NewsWebsite.Areas.Admin.Controllers
                             else
                                 viewModel.PublishDateTime = news.PublishDateTime;
                         }
+
+                        if (viewModel.pdfFile != null)
+                        {
+
+                            string FileExtension = Path.GetExtension(viewModel.pdfFile.FileName);
+                            string NewFileName = string.Concat(Guid.NewGuid().ToString(), FileExtension);
+                            var path = $"{_env.WebRootPath}/newsPDFs/{NewFileName}";
+                            using (var stream = new FileStream(path, FileMode.Create))
+                            {
+                                await viewModel.pdfFile.CopyToAsync(stream);
+                            }
+                            viewModel.pdfFileName = NewFileName;
+                        }
+                        else
+                            viewModel.pdfFileName = news.pdfFileName;
+                            
 
                         if (viewModel.ImageFile != null)
                         {
@@ -242,6 +264,14 @@ namespace NewsWebsite.Areas.Admin.Controllers
                 else
                 {
                     viewModel.ImageFile.UploadFileBase64($"{_env.WebRootPath}/newsImage/{viewModel.ImageName}");
+                    string FileExtension = Path.GetExtension(viewModel.pdfFile.FileName);
+                    string NewFileName = string.Concat(Guid.NewGuid().ToString(), FileExtension);
+                    var path = $"{_env.WebRootPath}/newsPDFs/{NewFileName}";
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await viewModel.pdfFile.CopyToAsync(stream);
+                    }
+                    viewModel.pdfFileName = NewFileName;
                     viewModel.NewsId = StringExtensions.GenerateId(10);
                     viewModel.UserId = User.Identity.GetUserId<int>();
 
